@@ -18,13 +18,38 @@ En moderne ejendomsplatform der muliggør anonyme "skuffesager" med intelligent 
 - **Auth**: Supabase Auth (med MitID integration planlagt)
 - **Storage**: Supabase Storage
 
+## 🚀 Quick Start
+
+**Want to see it running right now?** Check out [QUICKSTART.md](./QUICKSTART.md) for a 2-minute setup guide!
+
+```bash
+npm install
+npm run dev
+# Open http://localhost:3000
+```
+
 ## Projekt Status
 
-Dette projekt er i den indledende opbygningsfase. Der er implementeret:
+Dette projekt er nu i **MVP-fase** med en funktionsdygtig prototype! ✨
+
+**Implementeret:**
 
 - ✅ Database schema migration med alle nødvendige tabeller
-- ✅ TypeScript type definitions
-- ✅ Projekt konfiguration (package.json, tsconfig.json)
+- ✅ TypeScript type definitions med fuld type-safety
+- ✅ Projekt konfiguration (Next.js 15, tRPC, Tailwind CSS)
+- ✅ Mock database layer for lokal udvikling (ingen Supabase påkrævet)
+- ✅ tRPC API med property, buyer og match endpoints
+- ✅ Complete UI med responsive design:
+  - Landing page
+  - Property browsing page
+  - Multi-step property creation
+- ✅ **Real-time Price Slider** med live buyer count feedback! 🎯
+- ✅ 7 mock properties + 5 buyer profiles
+
+**Se platformen:**
+- Home: http://localhost:3000
+- Browse boliger: http://localhost:3000/koeb
+- **Pris-slider demo:** http://localhost:3000/saelg/ny (Step 2)
 
 ## Database Schema
 
