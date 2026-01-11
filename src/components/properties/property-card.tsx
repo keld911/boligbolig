@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { PropertyWithDetails } from '@/types/database';
 import { PROPERTY_TYPE_LABELS } from '@/types/database';
@@ -74,9 +75,11 @@ export function PropertyCard({ property, isAnonymous = true }: PropertyCardProps
       </CardContent>
 
       <CardFooter>
-        <Button variant="outline" className="w-full">
-          Se detaljer
-        </Button>
+        <Link href={`/bolig/${property.id}`} className="w-full">
+          <Button variant="outline" className="w-full">
+            Se detaljer
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
