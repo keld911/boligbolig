@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { trpc } from '@/lib/trpc/client';
 import { PropertyCard } from '@/components/properties/property-card';
-import { Home, Filter, X } from 'lucide-react';
+import { Home, Filter, X, Search } from 'lucide-react';
 import Link from 'next/link';
 import { PropertyType, PROPERTY_TYPE_LABELS } from '@/types/database';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,23 +11,39 @@ import { Button } from '@/components/ui/button';
 
 export default function KoebPage() {
   const [showFilters, setShowFilters] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState<{
     regionId?: number;
     propertyType?: PropertyType;
   }>({});
 
-  const { data: properties, isLoading } = trpc.property.list.useQuery({
+  const { data: allProperties, isLoading } = trpc.property.list.useQuery({
     status: 'aktiv',
     ...filters,
   });
 
   const { data: regions } = trpc.property.regions.useQuery();
 
+  // Client-side search filtering
+  const properties = allProperties?.filter((property) => {
+    if (!searchQuery) return true;
+
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      property.region?.name?.toLowerCase().includes(searchLower) ||
+      property.address_city?.toLowerCase().includes(searchLower) ||
+      property.address_street?.toLowerCase().includes(searchLower) ||
+      PROPERTY_TYPE_LABELS[property.property_type].toLowerCase().includes(searchLower) ||
+      property.asking_price.toString().includes(searchQuery)
+    );
+  });
+
   const filteredCount = properties?.length || 0;
-  const hasActiveFilters = filters.regionId || filters.propertyType;
+  const hasActiveFilters = filters.regionId || filters.propertyType || searchQuery;
 
   const clearFilters = () => {
     setFilters({});
+    setSearchQuery('');
   };
 
   return (
@@ -58,7 +74,7 @@ export default function KoebPage() {
       </nav>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex items-start justify-between mb-8">
+        <div className="flex items-start justify-between mb-6">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Tilgængelige boliger</h1>
             <p className="mt-2 text-gray-600">
@@ -78,6 +94,28 @@ export default function KoebPage() {
               </span>
             )}
           </Button>
+        </div>
+
+        {/* Search Bar */}
+        <div className="mb-8">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Søg efter område, boligtype, eller pris..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Filters */}

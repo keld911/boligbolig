@@ -80,6 +80,28 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+
+          {/* Ring Matches Feature - Full Width */}
+          <div className="mt-8">
+            <Link href="/ring-matches">
+              <div className="bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow cursor-pointer">
+                <div className="text-center text-white">
+                  <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white bg-opacity-20 mx-auto mb-4">
+                    <TrendingUp className="h-10 w-10" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">
+                    🔄 Ring-Matches: Cirkulære Bolighandler
+                  </h3>
+                  <p className="text-lg opacity-90 max-w-3xl mx-auto">
+                    Unik funktion! Flere parter kan bytte boliger i en cirkulær kæde. Sælg din bolig og køb en anden samtidigt - ingen mellemfinansiering nødvendig.
+                  </p>
+                  <span className="inline-block mt-4 text-white font-medium">
+                    Se hvordan det fungerer →
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
 
         <div className="mt-16 text-center">
