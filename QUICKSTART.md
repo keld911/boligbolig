@@ -30,18 +30,42 @@ That's it! The platform is now running with mock data.
 
 ### Main Pages
 
+#### For Everyone
 - **Home Page:** [http://localhost:3000](http://localhost:3000)
   - Landing page with platform overview
+  - Feature showcase
 
-- **Browse Properties (Køb):** [http://localhost:3000/koeb](http://localhost:3000/koeb)
-  - See all 7 available properties with mock data
-  - View property cards with details
+#### For Buyers
+- **Browse Properties:** [http://localhost:3000/koeb](http://localhost:3000/koeb)
+  - See all 7 available properties
+  - Filter by region and property type
+  - Click any property to see full details
 
-- **Create Property (Sælg):** [http://localhost:3000/saelg/ny](http://localhost:3000/saelg/ny)
-  - **This is where the magic happens! 🎯**
+- **Property Detail:** [http://localhost:3000/bolig/prop-1](http://localhost:3000/bolig/prop-1)
+  - Full property information
+  - Price slider showing demand
+  - Area statistics
+
+- **Create Buyer Profile:** [http://localhost:3000/koeber/ny](http://localhost:3000/koeber/ny)
+  - 3-step wizard to set up your search
+  - Define budget, property types, and areas
+
+- **Buyer Matches:** [http://localhost:3000/koeber/matches](http://localhost:3000/koeber/matches)
+  - See properties that match your profile
+  - View match scores
+  - Track your search criteria
+
+#### For Sellers
+- **Create Property:** [http://localhost:3000/saelg/ny](http://localhost:3000/saelg/ny)
+  - **This is where the price slider magic happens! 🎯**
   - Multi-step form to create a property listing
   - **Step 2 shows the real-time Price Slider** with buyer count feedback
   - Try adjusting the price and see how many buyers are interested!
+
+- **Seller Dashboard:** [http://localhost:3000/saelg/matches](http://localhost:3000/saelg/matches)
+  - Overview of your properties
+  - See matched buyers
+  - Track interest levels
 
 ### Key Features to Test
 
@@ -54,35 +78,66 @@ That's it! The platform is now running with mock data.
   - Visual demand chart showing interest at different price points
   - Contextual insights based on current pricing
 
-#### 2. Property Browsing
+#### 2. Property Browsing with Filters
 - Go to [http://localhost:3000/koeb](http://localhost:3000/koeb)
-- Browse 7 different properties across different regions
-- See property cards with:
-  - Price, size, rooms, build year
-  - Energy labels
-  - Anonymous regions (København K, Aarhus, etc.)
+- Click "Filtre" to show/hide filter panel
+- Filter by region (København K, Aarhus, etc.)
+- Filter by property type (Villa, Lejlighed, etc.)
+- Clear filters individually or all at once
+- See result count update in real-time
+
+#### 3. Property Detail View
+- Click "Se detaljer" on any property card
+- See full property information with price slider
+- View area statistics and gennemsnit m² prices
+- Click "Opret køberprofil" to start matching process
+
+#### 4. Buyer Profile Creation
+- Go to [http://localhost:3000/koeber/ny](http://localhost:3000/koeber/ny)
+- **Step 1:** Set budget with flexibility slider
+- **Step 2:** Define size, rooms, and build year requirements
+- **Step 3:** Select one or more regions
+- See profile summary before submission
+
+#### 5. Matching Dashboards
+- **Buyer side:** [http://localhost:3000/koeber/matches](http://localhost:3000/koeber/matches)
+  - View all properties that match your criteria
+  - See match scores (percentage)
+  - Edit your profile
+
+- **Seller side:** [http://localhost:3000/saelg/matches](http://localhost:3000/saelg/matches)
+  - View all your properties
+  - See number of matches per property
+  - See interested buyer count
+  - View potential buyers with match scores
 
 ## 🎨 What's Implemented
 
-✅ **Complete UI:**
+✅ **Complete UI - 11 Pages:**
 - Landing page with feature showcase
-- Property browsing with filtering
-- Multi-step property creation form
-- Real-time price slider component
-- Responsive design with Tailwind CSS
+- Property browsing with advanced filtering
+- Property detail page with full information
+- Multi-step property creation form (3 steps)
+- Multi-step buyer profile creation (3 steps)
+- Buyer matching dashboard
+- Seller matching dashboard
+- Responsive design with Tailwind CSS throughout
 
-✅ **Backend (tRPC):**
-- Property CRUD operations
-- Buyer profile management
+✅ **Backend (tRPC) - 3 Routers:**
+- Property router: CRUD, filtering, buyer count, price slider data
+- Buyer router: Profile management, matching queries
+- Match router: Direct matches, property/buyer lookups
 - Real-time buyer count calculations
 - Price slider data generation
 - Matching algorithms
 
-✅ **Mock Data:**
-- 7 properties across 4 regions
-- 5 buyer profiles with different budgets
+✅ **Mock Data - Production-Ready:**
+- 7 diverse properties across 4 regions
+- 5 buyer profiles with varied budgets and preferences
+- Match data showing algorithm results
 - Property features and preferences
 - Full type safety with TypeScript
+- Ready to swap with real Supabase data
 
 ## 📊 Mock Data Overview
 
